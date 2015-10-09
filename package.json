@@ -20,9 +20,22 @@
   },
   "homepage": "https://github.com/h5-static/h5-compiler-ejs#readme",
   "dependencies": {
+    "@dp/lion": "^1.1.1",
+    "async": "^1.4.2",
     "ejs": "^2.3.4",
+    "gulp-util": "^3.0.6",
     "neuron-pkg": "^0.1.0",
     "semver": "^2.3.0",
     "shrinked": "^0.1.2"
+  },
+  "cortex": {
+    "dependencies": {
+      "q": "^1.1.1"
+    },
+    "asyncDependencies": {},
+    "devDependencies": {},
+    "directories": {},
+    "engines": {},
+    "scripts": {}
   }
 }
