@@ -34,9 +34,11 @@ function getHost(){
 
 	// 重写
 	function _overwrite(){
+		var deferred = Q.defer();
 		getHost = function(){
-			return resourceHost;
+			 deferred.resolve(resourceHost);
 		}
+		return deferred.promise;
 	}
 
 	// 本地就不用再去拿
