@@ -56,7 +56,6 @@ Compiler.prototype._loadHandler = function(item,cb){
 var content = fs.readFileSync("./index.html","utf8");
 
 new Compiler(content,{},function(cont){
-  debugger;
 })
 
 module.exports = Compiler;

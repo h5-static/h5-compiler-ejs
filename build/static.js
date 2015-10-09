@@ -1,4 +1,5 @@
 var getHost = require("../util/host");
+var Uri = require("../util/uri");
 
 /*
 	static 解析
@@ -8,8 +9,7 @@ var getHost = require("../util/host");
 module.exports = function(cb){
 	getHost().then(function(host){
 		cb(function(title){
-			 var url_path = this._static_path(title);
-  			return this._resolve_path(url_path);
+			 var url_path = Uri.static_path(title);
 		})
 	})
 }

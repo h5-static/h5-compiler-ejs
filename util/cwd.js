@@ -4,6 +4,6 @@ module.exports = {
 	die: function(err) {
 	    gutil.beep();
 	    console.error("Error", err.stack || err);
-	    process.exit(1);
+	    // process.exit(1);
 	}
 }
