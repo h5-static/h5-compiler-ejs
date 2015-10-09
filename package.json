@@ -1,0 +1,28 @@
+{
+  "name": "h5-compiler-ejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/h5-static/h5-compiler-ejs.git"
+  },
+  "keywords": [
+    "ejs"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/h5-static/h5-compiler-ejs/issues"
+  },
+  "homepage": "https://github.com/h5-static/h5-compiler-ejs#readme",
+  "dependencies": {
+    "ejs": "^2.3.4",
+    "neuron-pkg": "^0.1.0",
+    "semver": "^2.3.0",
+    "shrinked": "^0.1.2"
+  }
+}
