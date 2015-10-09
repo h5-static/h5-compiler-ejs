@@ -1,7 +1,5 @@
 /*
   使用方法
-  先初始化，扩展方法
-  然后render数据
 */
 
 
@@ -46,7 +44,7 @@ function Compiler(fileContent,options,callback){
 }
 
 
-HCompile.prototype._loadHandler = function(item,cb){
+Compiler.prototype._loadHandler = function(item,cb){
   var self = this;
   var _hanlder = self._hanlder;
   require(path.join(BUILD_DIR,item.toLowerCase()))(function(handler){
@@ -55,15 +53,6 @@ HCompile.prototype._loadHandler = function(item,cb){
   });
 }
 
-
-/*
-    render 外部暴漏方法
-    页面渲染
-*/
-Compiler.prototype.render = function(template){
-    //页面编译 
-    return new Ejs(this.handler)(template);
-}
 
 
 module.exports = Compiler;
