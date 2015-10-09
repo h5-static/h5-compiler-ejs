@@ -3,6 +3,10 @@ var RESOURCE_SERVER_URL = "neocortex-4j.static.resourceServer";
 var die = require("./cwd").die;
 var Q = require("q");
 
+ENV =  "beta";
+
+process.env.NODE_LION_ENV = ENV == "beta" ? "qa" : ENV;
+
 function _resourceServerSanitizer(v) {
     if (v.indexOf("[") == 0) {
         return JSON.parse(v);
@@ -22,7 +26,7 @@ function _validator(v, done) {
 
 
 function getHost(){
-	var deferred = q.defer();
+	var deferred = Q.defer();
 	var resourceHost;
 
 	// 重写
@@ -36,7 +40,6 @@ function getHost(){
 	if(ENV == "dev"){
 		resourceHost = "";
 		_overwrite();
-
 		deferred.resolve("");
 	}else{
 		var lion = require("@dp/lion")();
