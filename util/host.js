@@ -3,9 +3,12 @@ var RESOURCE_SERVER_URL = "neocortex-4j.static.resourceServer";
 var die = require("./cwd").die;
 var Q = require("q");
 
+/*
+	模拟beta环境
+*/
 ENV =  "beta";
-
 process.env.NODE_LION_ENV = ENV == "beta" ? "qa" : ENV;
+
 
 function _resourceServerSanitizer(v) {
     if (v.indexOf("[") == 0) {
