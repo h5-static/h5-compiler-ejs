@@ -2,6 +2,7 @@ var ENV = require("./env");
 var RESOURCE_SERVER_URL = "neocortex-4j.static.resourceServer";
 var die = require("./cwd").die;
 var Q = require("q");
+var OverWriteFn = require("./overwrite");
 
 /*
 	模拟beta环境
@@ -32,19 +33,11 @@ function getHost(){
 	var deferred = Q.defer();
 	var resourceHost;
 
-	// 重写
-	function _overwrite(){
-		var deferred = Q.defer();
-		getHost = function(){
-			 deferred.resolve(resourceHost);
-		}
-		return deferred.promise;
-	}
 
 	// 本地就不用再去拿
 	if(ENV == "dev"){
 		resourceHost = "";
-		_overwrite();
+		OverWriteFn(getHost,resourceHost);
 		deferred.resolve("");
 	}else{
 		var lion = require("@dp/lion")();
@@ -59,10 +52,12 @@ function getHost(){
                 if (err) {
                     die(err);
                 }
+                OverWriteFn(getHost,resourceHost);
                 deferred.resolve(value);
             });
 		})
 	}
+
 	return deferred.promise;
 }
 

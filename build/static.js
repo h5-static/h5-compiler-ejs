@@ -1,5 +1,6 @@
 var getHost = require("../util/host");
 var Uri = require("../util/uri");
+var getVersion = require("../util/version");
 
 /*
 	static 解析
@@ -8,8 +9,8 @@ var Uri = require("../util/uri");
 */
 module.exports = function(cb){
 	getHost().then(function(host){
-		cb(function(title){
-			 var url_path = Uri.static_path(title);
+		getVersion().then(function(version){
+			
 		})
 	})
 }

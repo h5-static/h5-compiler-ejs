@@ -24,7 +24,8 @@
     "async": "^1.4.2",
     "ejs": "^2.3.4",
     "gulp-util": "^3.0.6",
-    "neuron-pkg": "^0.1.0",
+    "neuron-graph": "^1.0.2",
+    "neuron-pkg": "^0.1.5",
     "q": "^1.4.1",
     "semver": "^2.3.0",
     "shrinked": "^0.1.2"
