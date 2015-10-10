@@ -1,3 +1,7 @@
+/*
+	命令行相关
+*/
+
 var gutil = require('gulp-util');
 
 module.exports = {

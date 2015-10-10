@@ -1,3 +1,7 @@
+/*
+	本地
+*/
+
 var getHost = require("../util/host");
 var Uri = require("../util/uri");
 var getVersion = require("../util/version");

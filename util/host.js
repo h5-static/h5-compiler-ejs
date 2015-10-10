@@ -1,3 +1,7 @@
+/*
+    从lion中获取host
+*/
+
 var ENV = require("./env");
 var RESOURCE_SERVER_URL = "neocortex-4j.static.resourceServer";
 var die = require("./cwd").die;

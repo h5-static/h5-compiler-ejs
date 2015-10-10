@@ -1,3 +1,7 @@
+/*
+  获得依赖关系链
+*/
+
 var die = require("./cwd").die;
 var Q = require("q");
 var fs = require("fs");

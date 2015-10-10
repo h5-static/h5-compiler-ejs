@@ -1,3 +1,7 @@
+/*
+	资源标记符一些路径处理
+*/
+
 var node_path = require("path");
 
 var EXT = {
