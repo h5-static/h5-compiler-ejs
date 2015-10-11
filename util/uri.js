@@ -22,8 +22,17 @@ module.exports = {
 		var range = obj.range || "*";
 		var version = obj.version;
 		var path = obj.path;
+		 if(path == ''){
+		    path = name + '.js';
+		  }
+		  if(path.indexOf('/') == 0){
+		    path = path.slice(1);
+		  }
 
+		
 		var _version = semver.maxSatisfying(versions[name],range);
+
+
 
 		return node_path.join(name,_version,path);
 	}

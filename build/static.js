@@ -21,8 +21,7 @@ module.exports = function(cb){
 		var hosts = results[0].value;
 		var versions = results[1].value;
 		cb(function(title){
-		  	Uri.get_resolve_path(title,versions);
-		  	debugger;
+		  	return  Uri.get_resolve_path(title,versions);
 		})
 	});;
 }
