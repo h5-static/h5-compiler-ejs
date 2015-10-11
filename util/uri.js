@@ -23,7 +23,7 @@ module.exports = {
 		var version = obj.version;
 		var path = obj.path;
 
-		var _version = semver.maxSatisfying(versions[name]);
+		var _version = semver.maxSatisfying(versions[name],range);
 
 		return node_path.join(name,_version,path);
 	}

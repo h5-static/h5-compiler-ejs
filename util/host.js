@@ -11,7 +11,7 @@ var OverWriteFn = require("./overwrite");
 /*
 	模拟beta环境
 */
-ENV =  "beta";
+ENV =  "dev";
 process.env.NODE_LION_ENV = ENV == "beta" ? "qa" : ENV;
 
 

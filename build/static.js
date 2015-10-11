@@ -20,9 +20,9 @@ module.exports = function(cb){
 	]).then(function (results) {
 		var hosts = results[0].value;
 		var versions = results[1].value;
-
 		cb(function(title){
-		  	Uri.get_resolve_path(title,verion);
+		  	Uri.get_resolve_path(title,versions);
+		  	debugger;
 		})
 	});;
 }
