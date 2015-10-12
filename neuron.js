@@ -1221,8 +1221,8 @@ function module_to_absolute_url(mod) {
     // if is an async module, we will load the source file by module id
     : mod.id;
 
-  var origin_url = module_id_to_absolute_url(id);
-
+  var origin_url = (id);
+module_id_to_absolute_url
   return append_md5_to_path(origin_url, md5);
 }
 

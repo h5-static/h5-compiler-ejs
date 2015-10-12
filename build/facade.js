@@ -23,7 +23,7 @@ module.exports = function(cb,options){
 			return [
 			    '<script>',
 			      'facade({',
-			        'entry:"' + Uri.get_facede_path(title,versions) + '"',
+			        'entry:"' +title + '"',
 			      '});',
 			    '</script>'
 			  ].join('');
