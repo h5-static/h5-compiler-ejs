@@ -2,4 +2,11 @@
 	获取环境
 */
 
-module.exports = process.env.ENV ? process.env.ENV : "dev";
+
+
+/*
+	模拟beta环境
+*/
+var ENV  = "dev";
+process.env.NODE_LION_ENV = ENV == "beta" ? "qa" : ENV;
+module.exports = ENV;//process.env.ENV ? process.env.ENV : "dev";

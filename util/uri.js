@@ -6,6 +6,10 @@ var node_path = require("path");
 var pkg = require("neuron-pkg");
 var semver = require("semver");
 var getVersion = require("./version");
+var ENV = require("./env");
+var CWD = process.cwd();
+var LOCAL_MOD = "/neurons";
+var MOD  = "/mod";
 module.exports = {
 	/*
 		判断是否为绝对地址
@@ -29,11 +33,29 @@ module.exports = {
 		    path = path.slice(1);
 		  }
 
-		
 		var _version = semver.maxSatisfying(versions[name],range);
 
+		return node_path.join(ENV == "dev" ? LOCAL_MOD : MOD,name,_version,path);
+	},
+	get_host:function(hosts,hash){
+		var host;
+		if(!hosts)
+			return "";
 
-
-		return node_path.join(name,_version,path);
+		if(hash){
+		    host = hosts[path.length % hosts.length];
+		}else{
+		    host = hosts[0];
+		}
+		if (hash) {
+		    var frag = host.split(".");
+		    frag[0] = frag[0].replace(/\d/, "{n}");
+		    host = frag.join(".");
+		}
+		return host;
+	},
+	get_resolve_host:function(path,cwd){
+		cwd = cwd || CWD;
+		return node_path.dirname(node_path.relative(path,cwd));
 	}
 }

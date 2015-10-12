@@ -14,17 +14,24 @@ var die = require("./util/cwd").die;
 /*
   共用标签包括
 */
-var COMMON_HANDLER = ["static"];//["css","facade","jscombo","framework","static"]
+var COMMON_HANDLER = ["static","facade"];//["css","facade","jscombo","framework","static"]
 
 // 默认的静态标签什么的
 var STATIC_COMMON_HANDLER = {
+    
+}
+// 默认参数
+var DEFAULT_OPTIONS = {
 
 }
 
-function Compiler(fileContent,options,callback){
+function Compiler(fileContent,handler,options,callback){
     // 静态方法和外部开放方法继承操作
     var self = this;
-    self._hanlder = Tool.extend(STATIC_COMMON_HANDLER,options);
+    
+    self._hanlder = Tool.extend(STATIC_COMMON_HANDLER,handler);
+    
+    self.options = Tool.extend(DEFAULT_OPTIONS,options);
 
     // 共用方法继承
     async.each(COMMON_HANDLER,function(item,cb){
@@ -49,13 +56,13 @@ Compiler.prototype._loadHandler = function(item,cb){
   require(BUILD_DIR+item.toLowerCase())(function(handler){
     _hanlder[item] = handler;
     cb();
-  });
+  },self.options);
 }
 
 
 var content = fs.readFileSync("./index.html","utf8");
 
-new Compiler(content,{},function(cont){
+new Compiler(content,{},{path:"/Users/yangyuanxiang/yyy/h5-static/h5-compiler-ejs/test/haha/index.html"},function(cont){
 })
 
 module.exports = Compiler;
