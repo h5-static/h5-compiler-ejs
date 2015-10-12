@@ -37,6 +37,23 @@ module.exports = {
 
 		return node_path.join(name,_version,path);
 	},
+	get_facede_path:function(title,versions){
+		var obj = pkg(title);
+		var name = obj.name;
+		var range = obj.range || "*";
+		var version = obj.version;
+		var path = obj.path;
+		 if(path == ''){
+		    path = name + '.js';
+		  }
+		  if(path.indexOf('/') == 0){
+		    path = path.slice(1);
+		  }
+
+		var _version = semver.maxSatisfying(versions[name],range);
+
+		return node_path.join(name+"@"+_version,path);
+	},
 	get_host:function(hosts,hash){
 		var host;
 		if(!hosts)
@@ -56,7 +73,7 @@ module.exports = {
 	},
 	get_resolve_host:function(path,cwd){
 		cwd = cwd || CWD;
-		return node_path.dirname(node_path.relative(path,cwd));
+		return "../../../"+node_path.dirname(node_path.relative(path,cwd));
 	},
 	get_mod_prefix:function(){
 		return ENV == "dev" ? LOCAL_MOD : MOD;

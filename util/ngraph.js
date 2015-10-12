@@ -10,6 +10,7 @@ var OverWriteFn = require("./overwrite");
 var cwd_path = process.env.WORKSPACE || process.cwd();
 var ngraph = require("neuron-graph");
 var node_path = require("path")
+var pkg = require("neuron-pkg");
 
 function stripBOM(content) {
   // Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
@@ -31,8 +32,7 @@ function tryCatch(cb,content){
 
 
 function getShrinkWrap(){
-    var shrinkWrap;
-    var cortexJson;
+    var _ngraph;
     var deferred = Q.defer();
 
 
@@ -44,9 +44,23 @@ function getShrinkWrap(){
         cwd: cwd_path,
         built_root: node_path.join(cwd_path, process.env.CORTEX_DEST || 'neurons'),
         dependencyKeys: ['dependencies']
-    }, function(err, graph, _shrinkwrap){
-        OverWriteFn(getShrinkWrap,_shrinkwrap);
-        deferred.resolve(shrinkWrap = _shrinkwrap);
+    }, function(err, _graph, _shrinkwrap){
+        
+        // OverWriteFn(getShrinkWrap,ngraph);
+        
+        var _ = _graph._;
+
+
+        for(var key in _){
+            var mod_pkg = pkg(key);
+            _[mod_pkg.name+"@*"] = _[key];
+        }
+
+        deferred.resolve(_ngraph = {
+            graph:_graph,
+            shrinkwrap:_shrinkwrap
+        });
+
     });
     
     return deferred.promise;

@@ -5,20 +5,47 @@
 
 */
 
+
 var node_path = require("path");
 var Uri = require("../util/uri");
-var getVersion = require("../util/version");
+var getNgraph = require("../util/ngraph");
+var getHost = require("../util/host");
+var NEURON= require("../util/neuron");
 var Q = require("q");
 var cwd = process.cwd();
 
 module.exports = function(cb,options){
 	Q.allSettled([
-	    getVersion()
+	    getNgraph(),
+      getHost()
 	]).then(function (results) {
-		
-		var versions = results[0].value;
-		
+  		var ngraph = results[0].value;
+      var hosts = results[1].value;
+      var host = Uri.get_host(hosts);
+      var neuron_config = {};
+      var result = [];
+      if(!host)
+          host = Uri.get_resolve_host(options.path,options.cwd);
+      // 加载neuron
+      result.push(
+        '<script src="' +
+          node_path.join(host,Uri.get_mod_prefix(),NEURON.name,NEURON.version,NEURON.path) +
+        '"></script>'
+      );
 
-		cb(1);
-	});;
+      // 加载配置项
+      neuron_config.graph = ngraph.graph;
+
+      neuron_config.path = node_path.join(host,Uri.get_mod_prefix());
+	   
+
+      result.push('' + [
+        '<script>',
+        'neuron.config(' + JSON.stringify(neuron_config) + ');',
+        '</script>'
+      ].join(''));
+
+      cb(result.join(""));
+
+  });;
 }

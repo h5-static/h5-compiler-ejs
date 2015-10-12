@@ -22,7 +22,7 @@ var STATIC_COMMON_HANDLER = {
 }
 // 默认参数
 var DEFAULT_OPTIONS = {
-
+  
 }
 
 function Compiler(fileContent,handler,options,callback){
@@ -61,9 +61,17 @@ Compiler.prototype._loadHandler = function(item,cb){
 }
 
 
-var content = fs.readFileSync("./index.html","utf8");
+var content = fs.readFileSync("./template.html","utf8");
 
-new Compiler(content,{},{path:"/Users/yangyuanxiang/yyy/h5-static/h5-compiler-ejs/test/haha/index.html"},function(cont){
-})
+new Compiler(
+  content,
+  {},
+  {
+    path:"/Users/yangyuanxiang/yyy/h5-static/h5-compiler-ejs/html/test.html"
+  },
+  function(cont){
+    fs.writeFileSync("./html/test.html", cont)
+  }
+)
 
 module.exports = Compiler;

@@ -4,7 +4,7 @@
 
 var Q = require("q");
 var OverWriteFn = require("./overwrite");
-var getShrinkWrap = require("./shrinkwrap");
+var getNgraph = require("./ngraph");
 
 function getVersion (){
 
@@ -30,7 +30,9 @@ function getVersion (){
   }
 
 
-  getShrinkWrap().then(function(shrinkwrap){
+  getNgraph().then(function(ngraph){
+      var  shrinkwrap = ngraph.shrinkwrap;
+      
       OverWriteFn(getVersion,versions_cache);
       digdeps(shrinkwrap.name, shrinkwrap);
       deferred.resolve(versions_cache);

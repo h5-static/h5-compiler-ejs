@@ -2,12 +2,13 @@
   "name": "app-refund-static",
   "version": "0.1.9",
   "description": "The coolest cortex module.",
-  "entries": [
-    "entries/**/*.js"
-  ],
+  "main":"test.js",
   "css": [
     "css/**/*"
   ],
+  "scripts": {
+    "prebuild": "node index"
+  },
   "devDependencies": {
   },
   "dependencies": {
@@ -23,6 +24,9 @@
     "util-m-number-input": "^1.0.1",
     "util-m-confirm": "^1.1.0",
     "util-h5-cat": "~0.1.0"
+  },
+  "directories": {
+    "html": "html"
   },
   "repository": "git://code.dianpingoa.com/app-static/app-refund-static.git",
   "keywords": [

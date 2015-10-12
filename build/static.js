@@ -30,7 +30,7 @@ module.exports = function(cb,options){
 
 			if(!host)
 				host = Uri.get_resolve_host(options.path,options.cwd);
-
+			
 		  	return node_path.join( host , Uri.get_mod_prefix() ,Uri.get_mod_path(title,versions)); 
 		})
 	});;
