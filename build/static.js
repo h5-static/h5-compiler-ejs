@@ -17,7 +17,6 @@ var cwd = process.cwd();
 
 */
 module.exports = function(cb,options){
-
 	Q.allSettled([
     	getHost(),
 	    getVersion()
@@ -26,12 +25,13 @@ module.exports = function(cb,options){
 		var hosts = results[0].value;
 		var versions = results[1].value;
 		cb(function(title){
+
 			var host = Uri.get_host(hosts);
 
 			if(!host)
 				host = Uri.get_resolve_host(options.path,options.cwd);
 
-		  	return node_path.join( host , Uri.get_resolve_path(title,versions)); 
+		  	return node_path.join( host , Uri.get_mod_prefix() ,Uri.get_mod_path(title,versions)); 
 		})
 	});;
 }

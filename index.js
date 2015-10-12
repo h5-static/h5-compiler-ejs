@@ -14,7 +14,7 @@ var die = require("./util/cwd").die;
 /*
   共用标签包括
 */
-var COMMON_HANDLER = ["static","facade"];//["css","facade","jscombo","framework","static"]
+var COMMON_HANDLER = ["static","facade","framework"];//["css","facade","jscombo","framework","static"]
 
 // 默认的静态标签什么的
 var STATIC_COMMON_HANDLER = {
@@ -43,7 +43,8 @@ function Compiler(fileContent,handler,options,callback){
         try{
           callback&&callback(new Buffer(EJS.render(fileContent,self._hanlder)))
         }catch(e){
-          die("模板解析出错："+e);
+            callback&&callback(new Buffer(fileContent));
+            die("模板编译失败");
         }
       }
     });

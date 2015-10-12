@@ -15,14 +15,18 @@ var Q = require("q");
 var cwd = process.cwd();
 
 module.exports = function(cb,options){
-
 	Q.allSettled([
-    	getHost(),
 	    getVersion()
 	]).then(function (results) {
-		var path = options.path;
-		var hosts = results[0].value;
-
-
+		var versions = results[0].value;
+		cb(function(title){
+			return [
+			    '<script>',
+			      'facade({',
+			        'entry:"' + Uri.get_mod_path(title,versions) + '"',
+			      '});',
+			    '</script>'
+			  ].join('');
+		})
 	});;
 }

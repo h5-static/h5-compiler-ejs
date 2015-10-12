@@ -9,6 +9,7 @@ var CORTEXT_JSON = "cortex.json";
 var OverWriteFn = require("./overwrite");
 var cwd_path = process.env.WORKSPACE || process.cwd();
 var ngraph = require("neuron-graph");
+var node_path = require("path")
 
 function stripBOM(content) {
   // Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
@@ -36,12 +37,12 @@ function getShrinkWrap(){
 
 
     tryCatch(function(){
-      cortexJson = JSON.parse(stripBOM(fs.readFileSync(path.join(cwd_path,CORTEXT_JSON),"utf8")));;
+      cortexJson = JSON.parse(stripBOM(fs.readFileSync(node_path.join(cwd_path,CORTEXT_JSON),"utf8")));;
     },"cortex.json文件解析失败");
 
     ngraph(cortexJson,{
         cwd: cwd_path,
-        built_root: path.join(cwd_path, process.env.CORTEX_DEST || 'neurons'),
+        built_root: node_path.join(cwd_path, process.env.CORTEX_DEST || 'neurons'),
         dependencyKeys: ['dependencies']
     }, function(err, graph, _shrinkwrap){
         OverWriteFn(getShrinkWrap,_shrinkwrap);

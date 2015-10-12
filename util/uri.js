@@ -20,7 +20,7 @@ module.exports = {
 	/*
 		获取资源相对路径
 	*/
-	get_resolve_path : function(title,versions){
+	get_mod_path : function(title,versions){
 		var obj = pkg(title);
 		var name = obj.name;
 		var range = obj.range || "*";
@@ -35,7 +35,7 @@ module.exports = {
 
 		var _version = semver.maxSatisfying(versions[name],range);
 
-		return node_path.join(ENV == "dev" ? LOCAL_MOD : MOD,name,_version,path);
+		return node_path.join(name,_version,path);
 	},
 	get_host:function(hosts,hash){
 		var host;
@@ -57,5 +57,8 @@ module.exports = {
 	get_resolve_host:function(path,cwd){
 		cwd = cwd || CWD;
 		return node_path.dirname(node_path.relative(path,cwd));
+	},
+	get_mod_prefix:function(){
+		return ENV == "dev" ? LOCAL_MOD : MOD;
 	}
 }
