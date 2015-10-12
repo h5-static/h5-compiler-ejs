@@ -52,7 +52,8 @@ module.exports = {
 		    frag[0] = frag[0].replace(/\d/, "{n}");
 		    host = frag.join(".");
 		}
-		return host;
+
+		return host.replace(/\//g,"\/");
 	},
 	get_resolve_host:function(path,cwd){
 		cwd = cwd || CWD;

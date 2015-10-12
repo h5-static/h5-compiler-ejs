@@ -11,6 +11,10 @@ var cwd_path = process.env.WORKSPACE || process.cwd();
 var ngraph = require("neuron-graph");
 var node_path = require("path")
 var pkg = require("neuron-pkg");
+var semver = require("semver");
+var ENV = require("./env");
+
+
 
 function stripBOM(content) {
   // Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
@@ -37,8 +41,16 @@ function getShrinkWrap(){
 
 
     tryCatch(function(){
-      cortexJson = JSON.parse(stripBOM(fs.readFileSync(node_path.join(cwd_path,CORTEXT_JSON),"utf8")));;
+        cortexJson = JSON.parse(stripBOM(fs.readFileSync(node_path.join(cwd_path,CORTEXT_JSON),"utf8")));;
+        if(ENV != "dev" && ENV != "product"){
+            var s = semver.parse(cortexJson.version);
+            s.prerelease.length = 0;
+            s.prerelease.push(ENV);
+            cortexJson.version = s.format();
+        }
+
     },"cortex.json文件解析失败");
+
 
     ngraph(cortexJson,{
         cwd: cwd_path,

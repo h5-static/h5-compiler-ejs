@@ -29,14 +29,14 @@ module.exports = function(cb,options){
       // 加载neuron
       result.push(
         '<script src="' +
-          node_path.join(host,Uri.get_mod_prefix(),NEURON.name,NEURON.version,NEURON.path) +
+          host+node_path.join(Uri.get_mod_prefix(),NEURON.name,NEURON.version,NEURON.path) +
         '"></script>'
       );
 
       // 加载配置项
       neuron_config.graph = ngraph.graph;
 
-      neuron_config.path = node_path.join(host,Uri.get_mod_prefix());
+      neuron_config.path = host+Uri.get_mod_prefix();
 	   
 
       result.push('' + [

@@ -44,7 +44,7 @@ function getHost(){
                 console.error(Errors.FAIL_TO_GET_LION_CONFIG);
                 die(err);
             }
-            value = resourceHost = _resourceServerSanitizer(value);
+            value = resourceHost = _resourceServerSanitizer(value)[0];
             _validator(value, function(err) {
                 if (err) {
                     die(err);

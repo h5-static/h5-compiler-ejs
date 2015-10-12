@@ -13,6 +13,9 @@ var Uri = require("../util/uri");
 var getVersion = require("../util/version");
 var Q = require("q");
 var cwd = process.cwd();
+var pkg = require("neuron-pkg");
+var ENV = require("../util/env");
+
 
 module.exports = function(cb,options){
 	Q.allSettled([
@@ -20,10 +23,19 @@ module.exports = function(cb,options){
 	]).then(function (results) {
 		var versions = results[0].value;
 		cb(function(title){
+			var obj = pkg(title);
+			var mod_path;
+			var name = obj.name;
+			
+			// if(ENV != )
+
+
+
+
 			return [
 			    '<script>',
 			      'facade({',
-			        'entry:"' +title + '"',
+			        'entry:"' +mod_path + '"',
 			      '});',
 			    '</script>'
 			  ].join('');
