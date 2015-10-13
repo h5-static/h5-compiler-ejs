@@ -21,6 +21,9 @@
   "scripts": {
     "prebuild": "node index.js"
   },
+  "combo":{
+    // "filter":["underscore"]
+  },
   // The dependencies of the current package:
   // ALWAYS use `cortex install xxx --save` to save dependencies
   // rather than editing this field manually.

@@ -22,9 +22,7 @@ module.exports = function(cb,options){
 	
 	// 本地就直接放过
 	if(ENV == "dev"){
-		cb(function(title){
-			return "";
-		});
+		cb("");
 		return ;
 	}
 
@@ -40,9 +38,7 @@ module.exports = function(cb,options){
 		var versions = results[3].value;
 
 		cb(function(title){
-			return '<script async src="'+
-				get_jscombo(title,hosts,cortexJson,shrinkwrap,versions)+
-			'"></script>';
+			return 	get_jscombo(title,hosts,cortexJson,shrinkwrap,versions);
 		});
 
 	});;
