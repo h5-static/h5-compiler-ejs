@@ -10,7 +10,7 @@ var cwd = process.cwd();
 /*
 	static 解析
 	
-	<$ static(title) $>
+	<$- static(title) $>
 
 	解析为一个静态地址
 
