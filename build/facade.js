@@ -15,27 +15,23 @@ var Q = require("q");
 var cwd = process.cwd();
 var pkg = require("neuron-pkg");
 var ENV = require("../util/env");
-
+var getCtg = require("../util/ctg");
 
 module.exports = function(cb,options){
 	Q.allSettled([
-	    getVersion()
+	    getVersion(),
+	    getCtg()
 	]).then(function (results) {
 		var versions = results[0].value;
+		var cortexJson = results[1].value;
 		cb(function(title){
 			var obj = pkg(title);
-			var mod_path;
-			var name = obj.name;
-			
-			// if(ENV != )
-
-
-
+			obj.version = obj.version || cortexJson.version;
 
 			return [
 			    '<script>',
 			      'facade({',
-			        'entry:"' +mod_path + '"',
+			        'entry:"' + pkg.format(obj)+ '"',
 			      '});',
 			    '</script>'
 			  ].join('');

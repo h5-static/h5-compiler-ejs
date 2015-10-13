@@ -10,6 +10,7 @@ var ENV = require("./env");
 var CWD = process.cwd();
 var LOCAL_MOD = "/neurons";
 var MOD  = "/mod";
+var die = require("./cwd").die;
 module.exports = {
 	/*
 		判断是否为绝对地址
@@ -32,6 +33,9 @@ module.exports = {
 		  if(path.indexOf('/') == 0){
 		    path = path.slice(1);
 		  }
+
+		if(!versions[name])
+			die("没有找到该模块:"+name);
 
 		var _version = semver.maxSatisfying(versions[name],range);
 

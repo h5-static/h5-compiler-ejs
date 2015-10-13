@@ -27,6 +27,7 @@
     "neuron-graph": "^1.0.2",
     "neuron-pkg": "^0.1.5",
     "q": "^1.4.1",
+    "read-cortex-json": "^3.6.1",
     "semver": "^2.3.0",
     "shrinked": "^0.1.2"
   }

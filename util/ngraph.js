@@ -13,7 +13,7 @@ var node_path = require("path")
 var pkg = require("neuron-pkg");
 var semver = require("semver");
 var ENV = require("./env");
-
+var getCtg = require("./ctg");
 
 
 function stripBOM(content) {
@@ -39,42 +39,31 @@ function getShrinkWrap(){
     var _ngraph;
     var deferred = Q.defer();
 
+    getCtg().then(function(cortexJson){
 
-    tryCatch(function(){
-        cortexJson = JSON.parse(stripBOM(fs.readFileSync(node_path.join(cwd_path,CORTEXT_JSON),"utf8")));;
-        if(ENV != "dev" && ENV != "product"){
-            var s = semver.parse(cortexJson.version);
-            s.prerelease.length = 0;
-            s.prerelease.push(ENV);
-            cortexJson.version = s.format();
-        }
-
-    },"cortex.json文件解析失败");
-
-
-    ngraph(cortexJson,{
-        cwd: cwd_path,
-        built_root: node_path.join(cwd_path, process.env.CORTEX_DEST || 'neurons'),
-        dependencyKeys: ['dependencies']
-    }, function(err, _graph, _shrinkwrap){
-        
-        // OverWriteFn(getShrinkWrap,ngraph);
-        
-        var _ = _graph._;
+        ngraph(cortexJson,{
+            cwd: cwd_path,
+            built_root: node_path.join(cwd_path, process.env.CORTEX_DEST || 'neurons'),
+            dependencyKeys: ['dependencies']
+        }, function(err, _graph, _shrinkwrap){
+            
+            // OverWriteFn(getShrinkWrap,ngraph);
+            
+            var _ = _graph._;
 
 
-        for(var key in _){
-            var mod_pkg = pkg(key);
-            _[mod_pkg.name+"@*"] = _[key];
-        }
+            for(var key in _){
+                var mod_pkg = pkg(key);
+                _[mod_pkg.name+"@*"] = _[key];
+            }
 
-        deferred.resolve(_ngraph = {
-            graph:_graph,
-            shrinkwrap:_shrinkwrap
+            deferred.resolve(_ngraph = {
+                graph:_graph,
+                shrinkwrap:_shrinkwrap
+            });
+
         });
-
     });
-    
     return deferred.promise;
 }
 
