@@ -14,7 +14,7 @@ var die = require("./util/cwd").die;
 /*
   共用标签包括
 */
-var COMMON_HANDLER = ["static","facade","framework","combo_js","combo_js_src","combo_css","timestr","env","version"];
+var COMMON_HANDLER = ["static","facade","framework","combo_js","combo_js_src","combo_css","combo_css_src","timestr","env","version"];
 
 // 默认的静态标签什么的
 var STATIC_COMMON_HANDLER = {
