@@ -40,14 +40,14 @@ function getShrinkWrap(){
     var deferred = Q.defer();
 
     getCtg().then(function(cortexJson){
-
+      console.log(cortexJson);
         ngraph(cortexJson,{
             cwd: cwd_path,
             built_root: node_path.join(cwd_path, process.env.CORTEX_DEST || 'neurons'),
             dependencyKeys: ['dependencies']
         }, function(err, _graph, _shrinkwrap){
             
-            // OverWriteFn(getShrinkWrap,ngraph);
+            OverWriteFn(getShrinkWrap,ngraph);
             
             var _ = _graph._;
 
