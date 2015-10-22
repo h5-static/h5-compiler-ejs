@@ -22,7 +22,9 @@ module.exports = function(cb,options){
 	
 	// 本地就直接放过
 	if(ENV == "dev"){
-		cb("");
+		cb(function () {
+			return "";
+		});
 		return ;
 	}
 
