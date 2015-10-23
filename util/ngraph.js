@@ -40,7 +40,6 @@ function getShrinkWrap(){
     var deferred = Q.defer();
 
     getCtg().then(function(cortexJson){
-      console.log(cortexJson);
         ngraph(cortexJson,{
             cwd: cwd_path,
             built_root: node_path.join(cwd_path, process.env.CORTEX_DEST || 'neurons'),
