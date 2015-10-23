@@ -8,7 +8,7 @@ var semver = require("semver");
 var getVersion = require("./version");
 var ENV = require("./env");
 var CWD = process.cwd();
-var LOCAL_MOD_PREFIX = "/neurons";
+var LOCAL_MOD_PREFIX = "/";
 var MOD_PREFIX  = "/mod";
 var COMBO_PREFIX = "/concat";
 var die = require("./cwd").die;
@@ -62,7 +62,7 @@ module.exports = {
 	},
 	get_resolve_host:function(path,cwd){
 		cwd = cwd || CWD;
-		return "../../../"+node_path.dirname(node_path.relative(path,cwd));
+		return "../../"+node_path.dirname(node_path.relative(path,cwd));
 	},
 	get_mod_prefix:function(isCombo){
 		return isCombo ?COMBO_PREFIX  : ENV == "dev" ? LOCAL_MOD_PREFIX : MOD_PREFIX;
