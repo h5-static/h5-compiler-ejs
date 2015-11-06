@@ -43,7 +43,7 @@ function getShrinkWrap(){
         ngraph(cortexJson,{
             cwd: cwd_path,
             built_root: node_path.join(cwd_path, process.env.CORTEX_DEST || 'neurons'),
-            dependencyKeys: ['dependencies']
+            dependencyKeys: ['dependencies','asyncDependencies']
         }, function(err, _graph, _shrinkwrap){
             
             OverWriteFn(getShrinkWrap,ngraph);
