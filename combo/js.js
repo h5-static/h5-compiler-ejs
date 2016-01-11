@@ -5,6 +5,7 @@
 var node_path = require("path");
 var Uri = require("../util/uri");
 var cwd = process.cwd();
+var Tool =  require("../util/tool");
 var IS_COMBO = true;
 
 module.exports = function(title,hosts,cortexJson,shrinkwrap,versions){
@@ -15,29 +16,12 @@ module.exports = function(title,hosts,cortexJson,shrinkwrap,versions){
 
 	// 遍历依赖结果
 	var result = [];
-	
-	function _walk(obj,name,result){
-		if(obj.dependencies){
-			for(key in obj.dependencies){
-				_walk(obj.dependencies[key],key,result);
-			}
-		}
-		if(name && result.indexOf(name) == -1){
-			result.push(name);
-		}
-
-		return result;
-	}
 
 	// 搜集依赖文件
-	_walk(shrinkwrap,"",result);
+	Tool.walkDep(shrinkwrap,"",result);
 
 	// 过滤lib库
 	var jsFilterArray = cortexJson.combo ? (cortexJson.combo.filter || []) : [];
-	/*
-		强制过滤asset
-	*/
-	jsFilterArray.push("assert");
 
 	if(jsFilterArray.length)
 		result = result.filter(function(item){

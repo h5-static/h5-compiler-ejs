@@ -25,6 +25,19 @@ function _isFloat(n){
 }
 
 
+// 遍历依赖
+function _walkDep(obj,name,result){
+    result = result || [];
+    if(obj.dependencies){
+        for(key in obj.dependencies){
+            _walkDep(obj.dependencies[key],key,result);
+        }
+    }
+    if(name && name!="assert" && result.indexOf(name) == -1){
+        result.push(name);
+    }
+    return result;
+}
 
 function _clone(obj){
 	// 一般复制
@@ -121,5 +134,7 @@ module.exports = {
     // 继承
     extend:_extend,
     // 相对路经
-    isRelative:_isRelative
+    isRelative:_isRelative,
+    // 遍历依赖
+    walkDep:_walkDep
 }

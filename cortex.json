@@ -22,7 +22,7 @@
     "prebuild": "node index.js"
   },
   "combo":{
-    // "filter":["underscore"]
+    "filter":["underscore","zepto"]
   },
   // The dependencies of the current package:
   // ALWAYS use `cortex install xxx --save` to save dependencies
