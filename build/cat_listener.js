@@ -7,6 +7,6 @@ module.exports = function(cb){
     	getCtg()
 	]).then(function (results) {
 		var cortexJson = results[0].value;
-		cb(" onerror='typeof __CAT !=="+'"undefined"&&__CAT.call(this,{n:'+cortexJson.name+",v:"+cortexJson.version+"})' ")
+		cb(" onerror='typeof __CAT !=="+'"undefined"&&__CAT.call(this,{n:"'+cortexJson.name+'",v:"'+cortexJson.version+'"'+"})' ")
 	});
 }
