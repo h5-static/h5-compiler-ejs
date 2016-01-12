@@ -43,12 +43,11 @@ module.exports = function(cb,options){
 		var loaded = [];
 		var host = Uri.get_host(hosts);
 
-
 		function _url_build(title){
 			return Tag.script(host+node_path.join(Uri.get_mod_prefix() ,Uri.get_mod_path(title,versions)),{
 				cat_open : options.cat_open,
-				appname:title,
-				version:versions[title]&&versions[title][0]
+				appname:cortexJson.name,
+				version:cortexJson.version
 			});
 		}
 
@@ -70,7 +69,13 @@ module.exports = function(cb,options){
 			// 加载配置
 			// 是否需要combo
 			if(!noCombo){
-				result.push(Tag.script(get_jscombo(title,hosts,cortexJson,shrinkwrap,versions)));
+				var obj = pkg(title);
+
+				result.push(Tag.script(get_jscombo(title,hosts,cortexJson,shrinkwrap,versions),{
+					cat_open : options.cat_open,
+					appname:cortexJson.name,
+					version:cortexJson.version
+				}));
 				// 加载过滤单个
 				var jsFilterArray = cortexJson.combo ? (cortexJson.combo.filter || []) : [];
 				jsFilterArray.forEach(function(item){
