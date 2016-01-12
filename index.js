@@ -14,15 +14,14 @@ var die = require("./util/cwd").die;
 /*
   共用标签包括
 */
-var COMMON_HANDLER = ["static","facade","framework","combo_js","combo_js_src","combo_css","combo_css_src","timestr","env","version"];
+var COMMON_HANDLER = ["static","facade","framework","combo_js","combo_js_src","combo_css","combo_css_src","timestr","env","version","cat"];
 
 // 默认的静态标签什么的
 var STATIC_COMMON_HANDLER = {
-    
 }
 // 默认参数
 var DEFAULT_OPTIONS = {
-  
+    cat_open:true
 }
 
 function Compiler(fileContent,handler,options,callback){
@@ -46,7 +45,6 @@ function Compiler(fileContent,handler,options,callback){
             callback&&callback(new Buffer(fileContent));
             die(e);
         }
-
       }
     });
 }

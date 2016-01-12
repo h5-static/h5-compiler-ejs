@@ -18,25 +18,26 @@ var getVersion = require("../util/version");
 var getNgraph = require("../util/ngraph");
 var get_csscombo = require("../combo/css");
 var TOOL = require("../util/tool");
-
-
+var Tag = require("../middleware/tag");
+var pkg = require("neuron-pkg");
+var getCtg = require("../util/ctg");
 module.exports = function(cb,options){
-
-	//创建css 标签
-	function _createCssTag(cssArr){
-		return TOOL.makeArray(cssArr).map(function(item){
-			return '<link rel="stylesheet" href="'+item+'" type="text/css"/>'
-		}).join("\n");
-	}
-
 	Q.allSettled([
     	getHost(),
-	    getVersion()
+	    getVersion(),
+	    getCtg()
 	]).then(function (results) {
 		var path = options.path;
 		var hosts = results[0].value;
 		var versions = results[1].value;
-	
+		var cortexJson = results[2].value;
+		//创建css 标签
+		function _createCssTag(cssArr){
+			return TOOL.makeArray(cssArr).map(function(item){
+				return Tag.css(item,{appname:cortexJson.name,version:cortexJson.version,cat_open:options.cat_open});
+			}).join("\n");
+		}
+
 		var host = Uri.get_host(hosts);
 		if(!host)
 			host = Uri.get_resolve_host(options.path,options.cwd);

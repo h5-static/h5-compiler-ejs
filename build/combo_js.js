@@ -17,7 +17,7 @@ var getVersion = require("../util/version");
 var getNgraph = require("../util/ngraph");
 var Tool = require("../util/tool");
 var pkg = require("neuron-pkg");
-var Tag = require("../util/tag");
+var Tag = require("../middleware/tag");
 
 
 module.exports = function(cb,options){
@@ -45,9 +45,12 @@ module.exports = function(cb,options){
 
 
 		function _url_build(title){
-			return Tag.script(host+node_path.join(Uri.get_mod_prefix() ,Uri.get_mod_path(title,versions)))
+			return Tag.script(host+node_path.join(Uri.get_mod_prefix() ,Uri.get_mod_path(title,versions)),{
+				cat_open : options.cat_open,
+				appname:title,
+				version:versions[title]&&versions[title][0]
+			});
 		}
-
 
 		// 搜集依赖文件
 		Tool.walkDep(shrinkwrap,"",deps);

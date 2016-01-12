@@ -25,7 +25,6 @@ module.exports = function(cb,options){
 		var hosts = results[0].value;
 		var versions = results[1].value;
 		cb(function(title){
-
 			var host = Uri.get_host(hosts);
 			if(!host)
 				host = Uri.get_resolve_host(options.path,options.cwd);
