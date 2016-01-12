@@ -65,7 +65,7 @@ module.exports = function(cb,options){
 				loaded.push(obj.name+"@"+obj.version+obj.path);
 			}
 			// 配置loadad
-			result.push('<script>neuron.config('+JSON.stringify({loaded:loaded})+')</script>)');
+			result.push('<script>neuron.config('+JSON.stringify({loaded:loaded})+')</script>');
 			// 加载配置
 			// 是否需要combo
 			if(!noCombo){
