@@ -37,7 +37,7 @@ function getHost(){
 		OverWriteFn(getHost,resourceHost);
 		deferred.resolve("");
 	}else{
-		var lion = require("@dp/lion")();
+		var lion = require("@dp/lion")({env: process.env.ENV == 'beta' ? 'qa' : process.env.ENV});
 
 		lion.get(RESOURCE_SERVER_URL,function(err, value){
 			if (err) {
