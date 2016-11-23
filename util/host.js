@@ -53,7 +53,7 @@ function getHost(){
           //           });
                 // })
            deferred.resolve(
-                ENV == "product" ? "//www.dpfile.com" : ENV=="ppe" ? "//ppe.dpfile.com" : "//s1.51ping.com"
+                ENV == "product" ? ["//www.dpfile.com"] : ENV=="ppe" ? ["//ppe.dpfile.com"] : ["//s1.51ping.com"]
             );
     }
 
