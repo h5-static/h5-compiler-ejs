@@ -41,7 +41,6 @@ function getHost(){
 
 		lion.get(RESOURCE_SERVER_URL,function(err, value){
 			if (err) {
-                console.error(Errors.FAIL_TO_GET_LION_CONFIG);
                 die(err);
             }
             value = resourceHost = _resourceServerSanitizer(value)[0];
