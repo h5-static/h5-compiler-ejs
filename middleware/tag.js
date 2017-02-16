@@ -8,7 +8,7 @@ function _listener(option){
 
 module.exports  = {
 	script:function(src,option){
-		return '<script '+_listener(option)+' src="'+src+'"></script>'
+		return '<script crossorigin="true" '+_listener(option)+' src="'+src+'"></script>'
 	},
 	css:function(src,option){
 		return '<link rel="stylesheet" '+_listener(option)+' href="'+src+'" type="text/css"/>'
